@@ -1,5 +1,4 @@
-import random, math, time
-# from numba import jit
+import random,time
 import matplotlib.pyplot as plt
 import pygame
 

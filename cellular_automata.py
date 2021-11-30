@@ -17,19 +17,19 @@ class CA(object):
             for i in range(100):
                 self.grid.append([])
 
-            for i in range(100):  # sets initial density : 1% otter, 59% empty, 30% kelp, 10% urchin
+            for i in range(100):  # sets initial density : 10% otter, 30% empty, 45% kelp, 15% urchin
                 for j in range(100):
                     temp = random.randint(1, 1000) # 1-10 is 1%, 1-100 is 10% trick: do [(110-11)+1]/10 =10%
                     if 1 <= temp <= 10:
                         self.grid[i].append(Otter([i, j]))
                         self.nb_otter += 1
 
-                    elif 11 <= temp <= 110:
+                    elif 11 <= temp <= 170:
                         self.grid[i].append(Urchin([i, j]))
                         self.urchin_pos.append([i, j])
                         self.nb_urchin += 1
 
-                    elif 110 <= temp <= 409:
+                    elif 171 <= temp <= 540:
                         self.grid[i].append(Kelp([i, j]))
                         self.nb_kelp += 1
 
@@ -204,7 +204,7 @@ class Kelp(Animal):
 
 class Urchin(Animal):
     def __init__(self, grid_position):
-        super().__init__(grid_position, 12, 2, 19)  # sets reprod_prob=12%,reprod_age=2, death_age=19
+        super().__init__(grid_position, 20, 2, 19)  # sets reprod_prob=12%,reprod_age=2, death_age=19
         self.has_eaten =0 # tracks how long it has been since urchin ate
 
     # RETURNS THE GRID
@@ -317,8 +317,8 @@ class Urchin(Animal):
 
 class Otter(Animal):
     def __init__(self, grid_position):
-        super().__init__(grid_position, 10, 4, 20)  # sets reprod_prob=10%,reprod_age=4, death_age=20
-        self.carrying_capacity=120 # sets carrying capacity to 120
+        super().__init__(grid_position, 3, 4, 20)  # sets reprod_prob=10%,reprod_age=4, death_age=20
+        self.carrying_capacity=300 # sets carrying capacity to 120
 
     def has_space(self, CA):  # used for reproduction
         # checking bounds

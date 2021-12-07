@@ -1,0 +1,16 @@
+variable,definition,units
+species,latin name,
+common_name,common species name,
+max_lifespan,the maximum age that can be reached by the organism,months
+growth_rate,rate of growth of an individual,
+reproduction_capability,how many offspring per adult,
+movement_ability,how fast can an individual move,
+consumption_rate,how much of prey can predator/herbavore consume,
+urchin_behaviour_shift,how much time before urchin shifts behaviour from active to passive ,
+age_of_reproduction,age the organism is able to start reproducing ,months
+food_requirements,how much food does the consumer need to consume to survive,
+dispersal_age,age when young can care for themselves,days
+gestation_period,time that it takes to produce an offspring,days
+inter_birth_interval,time between producing offspring,days
+reproduciton_time,time of year when reproduction happens,months 
+carrying_capacity,the maximum number of individuals a unit area can support,individuals/km^2

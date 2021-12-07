@@ -20,16 +20,16 @@ class CA(object):
             for i in range(100):  # sets initial density : 10% otter, 30% empty, 45% kelp, 15% urchin
                 for j in range(100):
                     temp = random.randint(1, 1000) # 1-10 is 1%, 1-100 is 10% trick: do [(110-11)+1]/10 =10%
-                    if 1 <= temp <= 10:
+                    if 901 <= temp <= 930:
                         self.grid[i].append(Otter([i, j]))
                         self.nb_otter += 1
 
-                    elif 11 <= temp <= 170:
+                    elif 1 <= temp <= 200:
                         self.grid[i].append(Urchin([i, j]))
                         self.urchin_pos.append([i, j])
                         self.nb_urchin += 1
 
-                    elif 171 <= temp <= 540:
+                    elif 201 <= temp <= 900:
                         self.grid[i].append(Kelp([i, j]))
                         self.nb_kelp += 1
 
@@ -143,7 +143,7 @@ class Animal:
         self.reprod_chance = reprod_chance
 
     def is_dead(self) -> bool:  # checks if it reached old age or hasn't eaten in a long time
-        if type(self) is Urchin and self.has_eaten>=5:
+        if type(self) is Urchin and self.has_eaten>=5: #urchin consumption death
             return True
         return self.age >= self.old
 
@@ -175,7 +175,7 @@ class Animal:
 
 class Kelp(Animal):
     def __init__(self, grid_position):
-        super().__init__(grid_position, 100, 1, 3)  # sets reprod_prob=100%,reprod_age=1, death_age=3
+        super().__init__(grid_position, 100, 1, 20)  # sets reprod_prob=100%,reprod_age=1, death_age=20
 
     def reproduce(self, CA):
         if not self.can_reproduce():
@@ -204,7 +204,7 @@ class Kelp(Animal):
 
 class Urchin(Animal):
     def __init__(self, grid_position):
-        super().__init__(grid_position, 20, 2, 19)  # sets reprod_prob=12%,reprod_age=2, death_age=19
+        super().__init__(grid_position, 10, 2, 100)  # sets reprod_prob=10%,reprod_age=2, death_age=100
         self.has_eaten =0 # tracks how long it has been since urchin ate
 
     # RETURNS THE GRID
@@ -317,8 +317,9 @@ class Urchin(Animal):
 
 class Otter(Animal):
     def __init__(self, grid_position):
-        super().__init__(grid_position, 3, 4, 20)  # sets reprod_prob=10%,reprod_age=4, death_age=20
-        self.carrying_capacity=300 # sets carrying capacity to 120
+        super().__init__(grid_position, 0, 0, 200000)  # sets reprod_prob=0%,reprod_age=0, death_age=200000
+        #if consider otters just as a parameter acting to control urchin population then otters cannot reproduce, they live forever and they have unlimited carrying capacity - as such set solely by the initial conditions
+        self.carrying_capacity=1 # sets carrying capacity to 120
 
     def has_space(self, CA):  # used for reproduction
         # checking bounds
@@ -416,7 +417,7 @@ def main():
         myBoard.display(screen)
         kel.append(myBoard.nb_kelp)
         urch.append(myBoard.nb_urchin)
-        ott.append(myBoard.nb_otter*10)
+        ott.append(myBoard.nb_otter*10) #increase the number of otters in visualization so on visible scale
         x.append(i)
         i += 1
 
